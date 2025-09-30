@@ -1,4 +1,3 @@
-# lesson05_task1.py
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
