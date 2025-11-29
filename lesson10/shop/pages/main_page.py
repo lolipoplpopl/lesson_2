@@ -1,42 +1,49 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.remote.webdriver import WebDriver
 from pages.cart_page import CartPage
 
 
 class MainPage:
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver) -> None:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def wait_for_load(self):
+    @allure.step("Дождаться загрузки страницы")
+    def wait_for_load(self) -> 'MainPage':
         self.wait.until(
             EC.presence_of_element_located((By.CLASS_NAME, "inventory_item"))
         )
         return self
 
-    def add_backpack_to_cart(self):
+    @allure.step("Добавить рюкзак в корзину")
+    def add_backpack_to_cart(self) -> 'MainPage':
         add_backpack = self.driver.find_element(
             By.ID, "add-to-cart-sauce-labs-backpack"
         )
         add_backpack.click()
         return self
 
-    def add_tshirt_to_cart(self):
+    @allure.step("Добавить футболку в корзину")
+    def add_tshirt_to_cart(self) -> 'MainPage':
         add_tshirt = self.driver.find_element(
             By.ID, "add-to-cart-sauce-labs-bolt-t-shirt"
         )
         add_tshirt.click()
         return self
 
-    def add_onesie_to_cart(self):
+    @allure.step("Добавить комбинезон в корзину")
+    def add_onesie_to_cart(self) -> 'MainPage':
         add_onesie = self.driver.find_element(
             By.ID, "add-to-cart-sauce-labs-onesie"
         )
         add_onesie.click()
         return self
 
-    def go_to_cart(self):
+    @allure.step("Перейти в корзину")
+    def go_to_cart(self) -> CartPage:
         cart_icon = self.driver.find_element(
             By.CLASS_NAME, "shopping_cart_link"
         )
